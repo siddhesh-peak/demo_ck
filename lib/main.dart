@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'package:flutter_incoming_call/flutter_incoming_call.dart';
 import 'package:uuid/uuid.dart';
