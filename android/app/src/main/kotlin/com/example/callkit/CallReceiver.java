@@ -26,6 +26,9 @@ public class CallReceiver extends BroadcastReceiver {
         if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)){
             message = "phone is idled";
             Toast.makeText(context, "Idled: "+message, Toast.LENGTH_SHORT).show();
+
+            // Intent i = new Intent(context, CustomBroadcastReceiver.class);
+            // context.sendBroadcast(i);
         }
     }
 }

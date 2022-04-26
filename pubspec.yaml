@@ -37,6 +37,7 @@ dependencies:
   flutter_incoming_call: ^0.1.1
   permission_handler: ^9.2.0
   uuid: ^3.0.6
+  flutter_broadcast_receiver: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:
