@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_broadcast_receiver/flutter_broadcast_receiver.dart';
 
 import 'package:flutter_incoming_call/flutter_incoming_call.dart';
 import 'package:uuid/uuid.dart';
@@ -70,9 +71,23 @@ class _MyHomePageState extends State<MyHomePage> {
     FlutterIncomingCall.endAllCalls();
   }
 
+  registerBroadcast() {
+    /// register
+    const String keyMessage = 'phone_call_rec';
+
+    /// Subscription Example
+    BroadcastReceiver().subscribe<String> // Data Type returned from publisher
+        (keyMessage, (message) {
+      print('Printing broadcast SiD : $message');
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+
+    registerBroadcast();
+
     FlutterIncomingCall.configure(
         appName: 'example_incoming_call',
         duration: 30000,
