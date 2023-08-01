@@ -45,24 +45,6 @@ public class AlertDialogClass extends Activity implements View.OnTouchListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        this.setFinishOnTouchOutside(false);
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.dialog_layout);
-//
-//        phoneNumberTextView = (TextView) findViewById(R.id.phone_number);
-//        userNameTextView = (TextView) findViewById(R.id.user_name);
-//        mCloseBtn = (ImageButton) findViewById(R.id.close_dialogue);
-//
-//        String contactName = getIntent().getStringExtra("contactName");
-//        String phoneNumber = getIntent().getStringExtra("phoneNumber");
-//
-//        userNameTextView.setText(contactName);
-//        phoneNumberTextView.setText(phoneNumber);
-//
-//        mCloseBtn.setOnClickListener(mDialogbuttonClickListener);
-
-
 //        ----------------------------------------------------
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -88,8 +70,6 @@ public class AlertDialogClass extends Activity implements View.OnTouchListener{
         mAlertDlgBuilder.setInverseBackgroundForced(true);
         mAlertDlgBuilder.setView(mDialogView);
 
-
-
         mAlertDialog = mAlertDlgBuilder.create();
 
         mAlertDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
@@ -102,7 +82,6 @@ public class AlertDialogClass extends Activity implements View.OnTouchListener{
 
 
         mAlertDialog.show();
-
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = mAlertDialog.getWindow();
@@ -181,13 +160,10 @@ public class AlertDialogClass extends Activity implements View.OnTouchListener{
     }
 
 
-    View.OnClickListener mDialogbuttonClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.close_dialogue) {
-                finish();
-                System.exit(0);
-            }
+    View.OnClickListener mDialogbuttonClickListener = v -> {
+        if (v.getId() == R.id.close_dialogue) {
+            finish();
+            System.exit(0);
         }
     };
 }

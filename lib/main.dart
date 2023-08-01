@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 
@@ -52,14 +53,35 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  var channelName = 'com.sequoiacap.native.Tribe';
+  static const platform = MethodChannel('com.sequoiacap.native.Tribe');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Call Kit'),
       ),
-      body: const Center(child: Text('Welcome to Caller Id App')),
+      body: Column(
+        children: [
+          const Center(child: Text('Welcome to Caller Id App')),
+          ElevatedButton(
+            onPressed: () {
+              saveContacts();
+            },
+            child: const Text('Save Contacts'),
+          ),
+        ],
+      ),
     );
+  }
+
+  Future<void> saveContacts() async {
+    List<Map<String, dynamic>> contactsList = [
+      {'name': 'Siddhesh', 'phone': '919881397762'},
+    ];
+    var result = await platform.invokeMethod('updateContacts', contactsList);
+    debugPrint('RESULT IN FLUTTER: $result');
   }
 }
 
@@ -123,8 +145,7 @@ class _PermissionState extends State<PermissionWidget> {
                 color: Colors.white,
               ),
               onPressed: () {
-                checkServiceStatus(
-                    context, _permission as PermissionWithService);
+                checkServiceStatus(context, _permission as PermissionWithService);
               })
           : null,
       onTap: () {
@@ -133,8 +154,7 @@ class _PermissionState extends State<PermissionWidget> {
     );
   }
 
-  void checkServiceStatus(
-      BuildContext context, PermissionWithService permission) async {
+  void checkServiceStatus(BuildContext context, PermissionWithService permission) async {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text((await permission.serviceStatus).toString()),
     ));

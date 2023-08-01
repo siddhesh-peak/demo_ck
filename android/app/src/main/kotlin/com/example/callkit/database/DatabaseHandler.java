@@ -117,6 +117,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteAllContact() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CONTACTS, "",
+                new String[]{});
+        db.close();
+    }
+
     // Getting contacts Count
     public int getContactsCount() {
         String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
@@ -130,7 +137,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Getting contacts by number
     public Contact getContactsByNumber(String number) {
-        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS + " WHERE " + KEY_PH_NO + " = '" + number +"'";
+        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS + " WHERE " + KEY_PH_NO + " = '" + number.replace("+", "").trim() +"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
 
